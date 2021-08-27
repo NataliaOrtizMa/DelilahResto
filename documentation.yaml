@@ -1,0 +1,451 @@
+openapi: 3.0.0
+
+servers:
+  - url: http://localhost
+    description: Develop server
+    variables:
+      port:
+        default: '3000'
+info:
+  description: Delilah Resto API - Acámica Project
+  version: "1.0.0"
+  title: Delilah Resto API
+  contact:
+    name: Natalia Ortiz Maldonado
+    email: nataliaortizma@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: users
+    description: Normal users, clients of the app
+  - name: admins
+    description: Users with special permissions
+  - name: developers
+paths:
+  /user:
+    post:
+      tags: 
+        - users
+      summary: Registers a new user
+      operationId: registerUser
+      description: |
+        By filling a form, you can register the user info in the system
+      responses:
+        '200':
+          description: 'User registered succesfully'
+        '400':
+          description: 'Invalid data, object invalid'
+        '401':
+          description:  'Incomplete data'
+        '409':
+          description: 'User already registered'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: User info to add
+    get:
+      tags:
+        - users
+        - admins
+      summary: Brings user information
+      operationId: getUser
+      description: |
+        Brings user information to display address in user order detail, and its name in admins orders board
+      responses:
+        '200':
+          description: 'User fetched succesfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: 'User not found'
+  /dishes:
+    post:
+      tags:
+        - admins
+      summary: Post a new dish
+      operationId: postDish
+      description: |
+        Creates a new dish to show in the app
+      responses:
+        '200':
+          description: 'New dish added successfully'
+        '401':
+          description: 'Incomplete data'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dishes'
+        description: Dish info to add
+    get:
+      tags:
+        - users
+      summary: Fetchs all the restaurant dishes
+      operationId: getDishes
+      description: |
+        Shows all the dishes loaded in the system
+      responses:
+        '200':
+          description: 'Dishes fetched successfully'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dishes'
+        '401':
+          description: 'Error fetching dishes'
+          
+    delete:
+      tags: 
+        - admins
+      summary: Remove one dish of the app
+      operationId: deleteDish
+      description: |
+        Admins can remove one dish from the app
+      parameters: 
+        - in: query
+          name: _id
+          description: Selected dish id
+          schema:
+            type: integer
+            format: uuid
+            example: 2312345
+      responses:
+        '200':
+          description: 'Dish removed'
+        '401':
+          description: 'Error deleting dish'
+  /favorites:
+    post:
+      tags:
+        - users
+      summary: Add a favorite dish
+      operationId: addFavorite
+      description: |
+        User can add a dish to their favorites
+      responses:
+        '200':
+          description: 'Dish added to favorites'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dishes'
+        '401':
+          description: 'Error adding dish'
+    get:
+      tags:
+        - users
+      summary: Fetch user favorite dishes
+      operationId: getFavorites
+      description: |
+        User can gets all their favorite dishes
+      responses:
+        '200': 
+          description: 'Dishes fetched successfully'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dishes'
+        '401':
+          description: 'Error fetching dishes'
+    delete:
+      tags: 
+        - users
+      summary: Remove one user favorite dish
+      operationId: deleteFavorite
+      description: |
+        Users can remove one dish from their favorites
+      parameters: 
+        - in: query
+          name: _id
+          description: Selected favorite dish id
+          schema:
+            type: integer
+            format: uuid
+            example: 2312345
+      responses:
+        '200':
+          description: 'Dish removed'
+        '401':
+          description: 'Error deleting dish'
+  /paymentTypes:
+    post:
+      tags:
+        - admins
+      summary: Post a new payment method
+      operationId: postPayment
+      description: |
+        Admins can add payment methods
+      responses:
+        '200':
+          description: 'Payment method created successfully'
+        '401':
+          description: 'Error creating payment method'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentMethods'
+        description: Payment method info to add
+    get:
+      tags:
+        - users
+      summary: Fetchs payment methods
+      operationId: getPayment
+      description: |
+        Shows the available payment types
+      responses:
+        '200':
+          description: 'Payment methods fetched successfully'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentMethods'
+        '401':
+          description: 'Error fetching payment methods'
+  /orderDetail:
+    post:
+      tags:
+        - users
+      summary: Adds dishes to the order
+      operationId: postOrderDetail
+      description: |
+        Users can add dishes to the order detail
+      responses:
+        '200':
+          description: 'Dish added to order successfully'
+        '401':
+          description: 'Error adding dish to order'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderDetail'
+        description: Dish info to add to order detail
+    get:
+      tags: 
+        - users
+      summary: Gets order detail dishes
+      operationId: getOrderDetail
+      description:  |
+        Users can get dishes in their order detail
+      responses:
+        '200':
+          description: 'Order detail fetched successfully'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderDetail'
+        '401':
+          description: 'Error fetching order detail'
+    delete:
+      tags: 
+        - users
+      summary: Deletes dish from order detail
+      operationId: deleteOrderDetail
+      description: |
+        Users can delete a dish from their order detail
+      responses:
+        '200':
+          description: 'Order detail deleted successfully'
+        '400':
+          description: 'Error deleting order detail'
+    put:
+      tags:
+        - users
+      summary: Updates order detail
+      operationId: updateOrderDetail
+      description:  |
+        Users can update their order detail by adding on removing cuantity of a dish
+      responses:
+        '200':
+          description: 'Order detail updated successfully'
+        '401':
+          description: 'Error updating order detail'
+  /orderHistory:
+    post:
+      tags:
+        - users
+      summary: Adds a order to history
+      operationId: postOrderHistory
+      description: |
+        Users can add a order to history when adding products to the order
+      responses:
+        '200': 
+          description: 'Order created successfully'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderHistory'
+        '400': 
+          description: 'Error adding order to history'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderHistory'
+        description: Dish info to add to order history
+    get:
+      tags: 
+        - admins
+        - users
+      summary: Fetchs users order history
+      operationId: getOrderHistory
+      description: |
+        Users can get their orders history, and Admins can get all users orders history
+      responses: 
+        '200':
+          description: 'Order history fetched successfully'
+        '401':
+          description: 'Error fetching order history'
+    put:
+      tags:
+        - admins
+      summary: Updates order history status
+      operationId: updateOrderHistory
+      description: |
+        Admins can changes order history status ( Nuevo, Confirmado, Preparando, Enviado, Entregado)
+      responses:
+        '200':
+          description: 'Order history updates successfully'
+        '401':
+          description: 'Error updating order history'
+components:
+  schemas:
+    User:
+      type: object
+      required: 
+        - id
+        - userNick
+        - fullName
+        - email
+        - phone
+        - address
+        - password
+        - role
+      properties:
+        id:
+          type: integer
+          format: uuid
+          example: 765709789
+        userNick:
+          type: string
+          example: nataliaortizma
+        fullName:
+          type: string
+          example: Natalia Ortiz Maldonado
+        email:
+          type: string
+          example: nataliaortizma@gmail.com
+        phone:
+          type: string
+          example: "123456789"
+        address:
+          type: string
+          example: "Calle 0 # 0 - 0"
+        password:
+          type: string
+          format: sha256
+          example: asjidsa8dasjd09asdy8yasd
+        role:
+          type: string
+          example: user
+    Dishes:
+      type: object
+      required:
+        - id
+        - dishName
+        - unitPrice
+        - urlImage
+      properties:
+        id:
+          type: integer
+          format: uuid
+          example: 765709789
+        dishName:
+          type: string
+          example: "Burger"
+        unitPrice:
+          type: integer
+          example: 10
+        urlImage:
+          type: string
+          format: url
+          example: 'https://google.image.com'
+    PaymentMethods:
+      type: object
+      required:
+        - id
+        - paymentType
+      properties:
+        id:
+          type: integer
+          format: uuid
+          example: 321830983
+        paymentType:
+          type: string
+          example: Efectivo
+    
+    OrderHistory:
+      type: object
+      required:
+        - id
+        - userPK
+        - status
+        - orderDate
+        - paymentPK
+      properties:
+        id:
+          type: integer
+          format: uuid
+          example: 98940323
+        userPK:
+          $ref: '#/components/schemas/User'
+        status:
+          type: string
+          example: Confirmado
+        orderDate:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+        paymentPK:
+          $ref: '#/components/schemas/PaymentMethods'
+    OrderDetail:
+      type: object
+      required:
+        - id
+        - orderPK
+        - dishPK
+        - unitPrice
+        - quantity
+      properties:
+        id:
+          type: integer
+          format: uuid
+          example: 77678342
+        orderPK: 
+          $ref: '#/components/schemas/OrderHistory'
+        dishPK:
+          $ref: '#/components/schemas/Dishes'
+        unitPrice:
+          type: number
+          example: 1.0
+        quantity:
+          type: integer
+          example: 1

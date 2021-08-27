@@ -1,0 +1,516 @@
+{
+	"info": {
+		"_postman_id": "30eb8a83-016d-4bca-b4d1-93b109eeefa4",
+		"name": "Delilah Resto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userNick\": \"natalia\", \r\n    \"fullName\": \"Natalia Ortiz Maldonado\",\r\n    \"email\": \"natalia@gmail.com\", \r\n    \"phone\": \"4552542\", \r\n    \"address\": \"Calle 1 # 1 - 1\", \r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"userNick\": \"natalia\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dishes",
+			"item": [
+				{
+					"name": "Post Dish",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5pY2siOiJuYXRhbGlhIiwiZnVsbE5hbWUiOiJOYXRhbGlhIE9ydGl6IE1hbGRvbmFkbyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjI5ODQyNzc5fQ.SQoYHshSTUJw0YrunMYCbwg8sSAVw8bTIy3haYbHZ4E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dishName\": \"Salchipapa\",\r\n    \"unitPrice\": \"200\",\r\n    \"urlImage\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/dishes/newDish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dishes",
+								"newDish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Dishes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/dishes/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dishes",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Dish",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/dishes/getOne/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dishes",
+								"getOne",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Dish",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dishName\": \"Perrito clasico\",\r\n    \"unitPrice\": 500,\r\n    \"urlImage\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/dishes/updateDish/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dishes",
+								"updateDish",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Dish",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favorites",
+			"item": [
+				{
+					"name": "New Favorite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5pY2siOiJuYXRhbGlhIiwiZnVsbE5hbWUiOiJOYXRhbGlhIE9ydGl6IE1hbGRvbmFkbyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjI5ODQyNzc5fQ.SQoYHshSTUJw0YrunMYCbwg8sSAVw8bTIy3haYbHZ4E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dishId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/favoriteDishes/newFavorite",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"favoriteDishes",
+								"newFavorite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Favorites",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5pY2siOiJuYXRhbGlhIiwiZnVsbE5hbWUiOiJOYXRhbGlhIE9ydGl6IE1hbGRvbmFkbyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjI5ODQyNzc5fQ.SQoYHshSTUJw0YrunMYCbwg8sSAVw8bTIy3haYbHZ4E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/favoriteDishes/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"favoriteDishes",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Favorite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5pY2siOiJuYXRhbGlhIiwiZnVsbE5hbWUiOiJOYXRhbGlhIE9ydGl6IE1hbGRvbmFkbyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjI5ODQyNzc5fQ.SQoYHshSTUJw0YrunMYCbwg8sSAVw8bTIy3haYbHZ4E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/favoriteDishes/removeFavorite/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"favoriteDishes",
+								"removeFavorite",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order History",
+			"item": [
+				{
+					"name": "New Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5pY2siOiJuYXRhbGlhIiwiZnVsbE5hbWUiOiJOYXRhbGlhIE9ydGl6IE1hbGRvbmFkbyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjI5ODQyNzc5fQ.SQoYHshSTUJw0YrunMYCbwg8sSAVw8bTIy3haYbHZ4E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/orderHistory/newOrder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"orderHistory",
+								"newOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5pY2siOiJuYXRhbGlhIiwiZnVsbE5hbWUiOiJOYXRhbGlhIE9ydGl6IE1hbGRvbmFkbyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjI5ODQyNzc5fQ.SQoYHshSTUJw0YrunMYCbwg8sSAVw8bTIy3haYbHZ4E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/orderHistory/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"orderHistory",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5pY2siOiJuYXRhbGlhIiwiZnVsbE5hbWUiOiJOYXRhbGlhIE9ydGl6IE1hbGRvbmFkbyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjI5ODQyNzc5fQ.SQoYHshSTUJw0YrunMYCbwg8sSAVw8bTIy3haYbHZ4E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/orderHistory/getOne/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"orderHistory",
+								"getOne",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5pY2siOiJuYXRhbGlhIiwiZnVsbE5hbWUiOiJOYXRhbGlhIE9ydGl6IE1hbGRvbmFkbyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjI5ODQyNzc5fQ.SQoYHshSTUJw0YrunMYCbwg8sSAVw8bTIy3haYbHZ4E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"paymentId\": \"2\",\r\n    \"statusId\": \"2\"\r\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/orderHistory/updateOrder/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"orderHistory",
+								"updateOrder",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order Detail",
+			"item": [
+				{
+					"name": "Add Detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5pY2siOiJuYXRhbGlhIiwiZnVsbE5hbWUiOiJOYXRhbGlhIE9ydGl6IE1hbGRvbmFkbyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjI5ODQyNzc5fQ.SQoYHshSTUJw0YrunMYCbwg8sSAVw8bTIy3haYbHZ4E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderId\": 1,\r\n    \"dishId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/orderDetail/newDetail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"orderDetail",
+								"newDetail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

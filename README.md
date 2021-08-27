@@ -8,3 +8,7 @@
 5. Dirigirse a [phpMyAdmin](https://remotemysql.com/phpmyadmin/index.php)
 6. Digitar Usuario: 2JD7usq9OY
 7. Digitar Contraseña: Bn7SXGSvJi
+
+# Nota
+
+El archivo `Delilah Resto.postman_collection.json` cuenta con las peticiones a la API ya estructuradas

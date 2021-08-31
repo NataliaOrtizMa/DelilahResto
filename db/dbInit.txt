@@ -1,0 +1,11 @@
+DROP DATABASE IF EXISTS delilah;
+CREATE DATABASE IF NOT EXISTS delilah;
+INSERT INTO dishes (
+        dishName, 
+        unitPrice, 
+        urlImage) 
+    VALUES (
+      '${dishName}',
+      '${unitPrice}',
+      '${urlImage}'
+    )

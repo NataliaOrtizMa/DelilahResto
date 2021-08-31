@@ -52,6 +52,10 @@ const dbDelete = async() => {
     if (err) throw err;
     console.log("Order Status Table deleted")
   });
+  connection.query(dishes().deleteTable, function (err, result) {
+    if (err) throw err;
+    console.log("Dishes table deleted");
+  });
   connection.query(users().deleteTable, function (err, result) {
     if (err) throw err;
     console.log("Users table deleted");
@@ -97,9 +101,25 @@ const dbInit = async() => {
     console.log("Admin registered");
   });
   const hash1 = await bcrypt.hash('1234', 10);
-  connection.query(users('natalia', 'Natalia Ortiz Maldonado', 'natalia@gmail.com', '4552542', 'Calle 1 # 1 - 1', hash1, 'user').setUser, function (err, result) {
+  connection.query(users('user', 'Usuario', 'user@gmail.com', '4552542', 'Calle 1 # 1 - 1', hash1, 'user').setUser, function (err, result) {
     if (err) throw err;
     console.log("User registered");
+  });
+  connection.query(dishes('Hamburguesa clásica', '350', '').setDish, function (err, result) {
+    if (err) throw err;
+    console.log("Dish created");
+  });
+  connection.query(dishes('Sándwich veggie', '310', '').setDish, function (err, result) {
+    if (err) throw err;
+    console.log("Dish created");
+  });
+  connection.query(dishes('Veggie Avocado', '310', '').setDish, function (err, result) {
+    if (err) throw err;
+    console.log("Dish created");
+  });
+  connection.query(favoriteDish(2, 3).setValues, function (err, result) {
+    if (err) throw err;
+    console.log("Dish added to favorites");
   });
   connection.query(paymentTypes().setValues, function (err, result) {
     if (err) throw err;
@@ -109,9 +129,18 @@ const dbInit = async() => {
     if (err) throw err;
     console.log("Order Statuses registered")
   });
+  connection.query(orderHistory(1).setHistory, function (err, result) {
+    if (err) throw err;
+    console.log("Order created");
+  });
+  connection.query(orderDetail(1, 1).setDetail, function (err, result) {
+    if (err) throw err;
+    console.log("Dish added to order");
+  });
 }
 
 function handleDisconnect() {
+  
   connection = mysql.createConnection(dbConfig);
 
   connection.connect(function(err) {

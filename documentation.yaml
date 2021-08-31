@@ -1,7 +1,7 @@
 openapi: 3.0.0
-
+# Arreglar 
 servers:
-  - url: http://localhost
+  - url: http://localhost/port/api
     description: Develop server
     variables:
       port:
@@ -23,7 +23,7 @@ tags:
     description: Users with special permissions
   - name: developers
 paths:
-  /user:
+  /users:
     post:
       tags: 
         - users

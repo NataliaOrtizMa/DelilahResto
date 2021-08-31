@@ -5,7 +5,7 @@
 2. Abrir en IDE
 3. En el archivo `/db/db.js`: Modificar en la variable `dbConfig` los valores de `user` y `password` de acuerdo a la configuración local de MySQL Server
 4. Guardar los cambios
-5. Copiar las querys del archivo dbInit.txt y ejecutar en MySQL Server
+5. Copiar las querys del archivo `dbInit.txt` y ejecutar en MySQL Server
 5. Abrir la terminal del IDE y ejecutar el comando `npm i` para instalar las dependencias
 6. En la terminal ejecutar el comando `npm start`
 

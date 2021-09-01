@@ -326,6 +326,18 @@ paths:
           description: 'Order history updates successfully'
         '401':
           description: 'Error updating order history'
+    delete:
+      tags: 
+        - admins
+      summary: Deletes order from history
+      operationId: deleteOrderDetail
+      description: |
+        Admins can delete a order from the history
+      responses:
+        '200':
+          description: 'Order deleted from history successfully'
+        '401':
+          description: 'Error deleting order from history'
 components:
   schemas:
     User:

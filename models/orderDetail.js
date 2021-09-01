@@ -33,6 +33,9 @@ const orderDetail = (orderId, dishId, detailId) => ({
   deleteDetail: 
     `DELETE FROM orderDetail
     WHERE id = '${detailId}'`,
+  deleteFromHistory:
+    `DELETE FROM orderDetail
+    WHERE id = '${orderId}'`,
   });
   
   module.exports = { orderDetail };

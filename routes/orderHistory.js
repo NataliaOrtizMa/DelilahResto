@@ -3,6 +3,7 @@ const router = express.Router();
 const { connection } = require("../db/db");
 const { orderHistory } = require("../models/orderHistory");
 const isAdmin = require("../middlewares/admin");
+const { orderDetail } = require("../models/orderDetail");
 
 router.post("/newOrder", async(req, res) => {
   const userId = req.user.id;
@@ -26,8 +27,8 @@ router.get("/getAll", isAdmin, async(req, res) => {
 })
 
 router.get("/getOne/:id", async(req, res) => {
-  const id = req.params.id;
-  connection.query(orderHistory(null, null, null, id).getOne, function (err, result) {
+  const orderId = req.params.id;
+  connection.query(orderHistory(null, null, null, orderId).getOne, function (err, result) {
     if (err) {
       return res.status(401).send({message: 'Process failed'})
     }
@@ -35,15 +36,31 @@ router.get("/getOne/:id", async(req, res) => {
   });
 })
 
-router.put("/updateOrder/:id", async(req, res) => {
-  const id = req.params.id;
+router.put("/updateOrder/:id", isAdmin, async(req, res) => {
+  const orderId = req.params.id;
   const userId = req.user.id;
   const {statusId, paymentId} = req.body;
-  connection.query(orderHistory(userId, statusId, paymentId, id).updateHistory, function (err, result) {
+  connection.query(orderHistory(userId, statusId, paymentId, orderId).updateHistory, function (err, result) {
     if (err) {
       return res.status(401).send({message: 'Process failed'})
     }
     res.status(200).send({message: 'Order updated successfully'})
+  });
+})
+
+router.delete("/deleteOrder/:id", isAdmin, async(req, res) => {
+  const orderId = req.params.id;
+  connection.query(orderDetail(orderId, null, null).deleteFromHistory, function (err, result) {
+    if (err) {
+      return res.status(401).send({message: 'Process failed'})
+    } else {
+      connection.query(orderHistory(null, null, null, orderId).deleteHistory, function (err, result) {
+        if (err) {
+          return res.status(401).send({message: 'Process failed'})
+        } 
+        res.status(200).send({message: 'Order deleted successfully'})
+      });
+    }
   });
 })
 
